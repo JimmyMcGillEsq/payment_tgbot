@@ -1,3 +1,5 @@
+import os
+
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, create_engine
 from sqlalchemy.orm import declarative_base
 from datetime import datetime, UTC
