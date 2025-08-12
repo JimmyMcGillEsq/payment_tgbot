@@ -2,6 +2,7 @@ import asyncio
 import os
 from telebot.async_telebot import AsyncTeleBot
 from dotenv import load_dotenv
+#import handlers for telebot
 from src import handlers # NoQa
 
 load_dotenv()
