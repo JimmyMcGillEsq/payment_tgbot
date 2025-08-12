@@ -1,4 +1,4 @@
-from main import bot
+from src.common import bot
 
 # Handle all other messages with content_type 'text' (content_types defaults to ['text'])
 @bot.message_handler(func=lambda message: True)

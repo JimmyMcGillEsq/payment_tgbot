@@ -1,4 +1,4 @@
-from main import bot
+from src.common import bot
 
 # Handle '/start' and '/help'
 @bot.message_handler(commands=['help', 'start'])
