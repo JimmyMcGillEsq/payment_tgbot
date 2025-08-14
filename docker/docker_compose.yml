@@ -1,0 +1,9 @@
+service:
+  database:
+    image: postgres:17.6
+    volumes:
+      - /home/alex/Projects/DataBases/postgresql/data:/home/alex/Projects/DataBases/postgresql/data
+    env_file:
+      - database.env
+    ports:
+      - "127.0.0.1:5432"
