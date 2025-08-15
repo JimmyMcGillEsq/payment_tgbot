@@ -1,6 +1,7 @@
 service:
   database:
     image: postgres:17.6
+    container_name: paybot_database
     volumes:
       - /home/alex/Projects/DataBases/postgresql/data:/home/alex/Projects/DataBases/postgresql/data
     env_file:
