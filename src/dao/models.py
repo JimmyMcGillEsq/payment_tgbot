@@ -5,7 +5,7 @@ from sqlalchemy import Column, BigInteger, String, Boolean, DateTime, create_eng
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-# базовый класс.
+# Базовый класс для всех моделей
 Base = declarative_base()
 
 class User(Base):
@@ -18,20 +18,22 @@ class User(Base):
     phone = Column(String(20), nullable=True) # номер телефона(может быть None)
     is_admin = Column(Boolean, default=False) # админ ли?
     is_active = Column(Boolean, default=True) # Active account?
-    registered_at = Column(DateTime, default=datetime.now(tz=UTC)) # registration date
+    registered_at = Column(DateTime(timezone=True), default=datetime.now(tz=UTC)) # registration date
 
-def __repr__(self):
+    def __repr__(self):
         return f'<User(id={self.telegram_id}, username="{self.username}")>'
 
-# Создаем движок SQL
+# Создаем синхронный движок SQL
 engine = create_engine(
     os.getenv("PAYBOT_DATABASE_URL",'sqlite:///PaymentsBot.db'),
     echo=True)
 
 # Создаем асинхронный движок SQ
-async_engine = create_async_engine(
-    os.getenv("PAYBOT_DATABASE_URL","sqlite+aiosqlite:///PaymentsBot.db"),
-    echo=True)
+AsyncSessionLocal =None
+if PAYBOT_ASYNC_DATABASE_URL := os.getenv("PAYBOT_ASYNC_DATABASE_URL"):
+    async_engine = create_async_engine(
+        os.getenv("PAYBOT_ASYNC_DATABASE_URL","sqlite+aiosqlite:///PaymentsBot.db"),
+        echo=True)
 
 #Создание асинхронных сессий для работе с БД
-AsyncSessionLocal = async_sessionmaker(async_engine, expire_on_commit=False)
+    AsyncSessionLocal = async_sessionmaker(async_engine, expire_on_commit=False)
