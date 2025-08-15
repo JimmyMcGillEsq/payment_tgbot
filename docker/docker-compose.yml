@@ -1,4 +1,6 @@
-service:
+version: "3.9"
+
+services:
   database:
     image: postgres:17.6
     container_name: paybot_database
@@ -7,4 +9,4 @@ service:
     env_file:
       - database.env
     ports:
-      - "127.0.0.1:5432"
+      - "127.0.0.1:5432:5432"
